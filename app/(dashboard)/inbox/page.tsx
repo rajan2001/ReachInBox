@@ -12,7 +12,7 @@ const Page = () => {
     const [inbox, setInbox] = useState<any>([])
     const [loading, setLoading] = useState(true)
     const [input, setInput] = useState('')
-    const [mail, setMail] = useState([])
+    const [mail, setMail] = useState<any>([])
 
 
     const response = async () => {
@@ -57,7 +57,6 @@ const Page = () => {
 
     }
 
-
     useEffect(() => {
         response()
     }, [])
@@ -89,8 +88,18 @@ const Page = () => {
         <div className="xl:pl-96  w-[calc(100%_-_2*9rem)]">
             <MailBox data={mail} />
         </div>
-        <aside className=" inset-y-0 right-0 bg-background fixed overflow-y-auto  w-72  border-l pt-[68px] px-4 py-6 sm:px-6 lg:px-8 xl:block">
+        <aside className=" inset-y-0 right-0 bg-background fixed overflow-y-auto  w-72  border-l pt-[68px]  xl:block">
+            <div className="pt-6 px-2">
+                <div className="bg-primary text-sm h-9 flex items-center pl-4 rounded-md ">Lead Deatils</div>
+                {mail.length !== 0 && <div className="px-4 py-6 flex flex-col gap-6 ">
+                    <div className="flex items-center justify-between text-xs">Name<span className="text-gray-400">{mail?.fromName}</span></div>
+                    <div className="flex items-center justify-between text-xs">Contact No<span className="text-gray-400">+54-9062827869</span></div>
 
+                    <div className="flex items-center justify-between text-xs">Email ID<span className="text-gray-400">{mail?.fromEmail}</span></div>
+                    <div className="flex items-center justify-between text-xs">Company Name<span className="text-gray-400">Reachinbox</span></div>
+
+                </div>}
+            </div>
         </aside>
     </>
 }
